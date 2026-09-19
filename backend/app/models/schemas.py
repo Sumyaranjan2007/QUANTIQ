@@ -303,5 +303,7 @@ class AIChatRequest(BaseModel):
 
 class AIChatResponse(BaseModel):
     message: str
-    provider: str  # "deterministic_engine", "gemini", or "groq"
+    provider: str  # "multi_agent_system", "deterministic_engine", "gemini", or "groq"
     confidence: float
+    active_agents: Optional[List[str]] = None
+    critic_confidence: Optional[str] = None

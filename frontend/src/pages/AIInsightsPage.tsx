@@ -63,7 +63,7 @@ export const AIInsightsPage: React.FC<AIInsightsPageProps> = ({
           <div className="flex items-center gap-2">
             <h1 className="text-2xl lg:text-3xl font-extrabold text-white tracking-tight">AI Quantitative Insights</h1>
             <span className="text-xs font-mono font-bold bg-violet-500/10 text-violet-400 border border-violet-500/20 px-2.5 py-0.5 rounded">
-              DESCRIPTIVE RESEARCH AGENT
+              MULTI-AGENT RESEARCH ENGINE
             </span>
           </div>
           <p className="text-sm text-slate-400 mt-1">

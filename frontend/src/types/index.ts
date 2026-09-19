@@ -278,4 +278,6 @@ export interface AIInsightsSummary {
 export interface AIChatMessage {
   role: "user" | "assistant";
   content: string;
+  active_agents?: string[];
+  critic_confidence?: string;
 }

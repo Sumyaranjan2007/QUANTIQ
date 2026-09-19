@@ -129,7 +129,13 @@ export const api = {
 
   // AI Chat
   sendAIChat: (messages: AIChatMessage[], context?: Record<string, any>) =>
-    request<{ message: string; provider: string; confidence: number }>("/api/ai/chat", {
+    request<{
+      message: string;
+      provider: string;
+      confidence: number;
+      active_agents?: string[];
+      critic_confidence?: string;
+    }>("/api/ai/chat", {
       method: "POST",
       body: JSON.stringify({ messages, context })
     })

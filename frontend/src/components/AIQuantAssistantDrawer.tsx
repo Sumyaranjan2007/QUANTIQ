@@ -55,7 +55,15 @@ export const AIQuantAssistantDrawer: React.FC<AIQuantAssistantDrawerProps> = ({
         win_rate_pct: 61.1
       });
 
-      setMessages([...newMessages, { role: "assistant", content: res.message }]);
+      setMessages([
+        ...newMessages,
+        {
+          role: "assistant",
+          content: res.message,
+          active_agents: res.active_agents,
+          critic_confidence: res.critic_confidence
+        }
+      ]);
     } catch (err: any) {
       setMessages([
         ...newMessages,
@@ -86,7 +94,7 @@ export const AIQuantAssistantDrawer: React.FC<AIQuantAssistantDrawerProps> = ({
               <div className="flex items-center gap-2">
                 <h3 className="text-sm font-bold text-white">QuantIQ AI Assistant</h3>
                 <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-violet-500/10 text-violet-400 border border-violet-500/20 font-bold">
-                  TELEMETRY-AWARE
+                  MULTI-AGENT
                 </span>
               </div>
               <p className="text-[11px] text-slate-400">Ask about current strategy metrics & risk</p>
@@ -131,7 +139,24 @@ export const AIQuantAssistantDrawer: React.FC<AIQuantAssistantDrawerProps> = ({
                     : "bg-[#0c121e] border border-[#1c273c] text-slate-200"
                 }`}
               >
-                {m.content}
+                <div className="whitespace-pre-line">{m.content}</div>
+
+                {m.role === "assistant" && m.active_agents && m.active_agents.length > 0 && (
+                  <details className="mt-2.5 pt-2 border-t border-[#1c273c] text-[10px] font-mono text-slate-400 group">
+                    <summary className="cursor-pointer hover:text-cyan-400 select-none flex items-center justify-between">
+                      <span className="font-semibold text-slate-300">Analysis powered by multiple agents</span>
+                      <span className="text-[9px] text-cyan-400">({m.active_agents.length} active)</span>
+                    </summary>
+                    <div className="mt-2 space-y-1 pl-1 bg-[#080d16] p-2 rounded border border-[#1c273c]/50">
+                      {m.active_agents.map((agent, i) => (
+                        <div key={i} className="flex items-center gap-1.5 text-slate-300">
+                          <span className="text-emerald-400 font-bold">✓</span>
+                          <span>{agent}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </details>
+                )}
               </div>
               {m.role === "user" && (
                 <div className="w-6 h-6 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center shrink-0 mt-0.5 border border-cyan-500/30">
